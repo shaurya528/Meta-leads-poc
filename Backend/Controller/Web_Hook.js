@@ -34,7 +34,7 @@ export const get_Webhook= (req, res) => {
       for (const change of entry.changes ?? []) {
         if (change.field === 'leadgen') {
          console.log("leadgen is successfully grabbed")
-         process_Lead(change.value)
+         process_Lead(change.value,req.io)
 
         }
       }

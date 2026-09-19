@@ -3,7 +3,7 @@ import { fetch_Lead_Detail } from "./fetch_lead.js";
 const leads = [];
 const seenLeadIds = new Set();
 
-export const process_Lead=async(value)=>{
+export const process_Lead=async(value,io)=>{
     const id = value.leadgen_id;
     if (!id || seenLeadIds.has(id)) return;
     seenLeadIds.add(id);
@@ -20,4 +20,11 @@ export const process_Lead=async(value)=>{
     
       leads.unshift(lead);
       console.log('Lead generated:', lead);
+      if (io) {
+        io.emit('new_lead', lead);
+        console.log('Lead successfully emitted to Socket.io:', lead.id);
+      } else {
+        console.warn('Socket.io instance (io) was not provided to process_Lead');
+      }
+     
 }
