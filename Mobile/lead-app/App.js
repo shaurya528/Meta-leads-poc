@@ -18,7 +18,6 @@ const colors = {
   warn: '#B45309',
 };
 
-// 3) Adjust these helpers if your backend names things differently
 const getId = (lead) => String(lead.id ?? lead.leadgenId ?? lead.leadgen_id ?? lead._id);
 
 function getDisplay(lead) {
@@ -44,7 +43,7 @@ function LeadCard({ lead }) {
         </Text>
       ))}
       {lead.detailsFetched === false && (
-        <Text style={styles.warning}>Form answers unavailable. Only the lead ID was received.</Text>
+        <Text style={styles.warning}>Form  unavailable. Only the lead ID was received.</Text>
       )}
       <Text style={styles.time}>{formatTime(lead.createdAt ?? lead.created_time)}</Text>
     </View>
@@ -57,7 +56,6 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Loads the saved leads from your backend (GET /leads must return an array)
   const fetchLeads = useCallback(async () => {
     try {
       const res = await fetch(`${SERVER_URL}/leads`, {
@@ -80,7 +78,7 @@ export default function App() {
 
     socket.on('connect', () => {
       setConnected(true);
-      fetchLeads(); // catch up on anything missed while disconnected
+      fetchLeads(); 
     });
     socket.on('disconnect', () => setConnected(false));
     socket.on('connect_error', (err) => console.log('Socket error:', err.message));
@@ -91,7 +89,7 @@ export default function App() {
       );
     });
 
-    return () => socket.disconnect(); // avoids duplicate connections
+    return () => socket.disconnect(); 
   }, [fetchLeads]);
 
   const onRefresh = async () => {
@@ -121,7 +119,7 @@ export default function App() {
           contentContainerStyle={styles.list}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           ListEmptyComponent={
-            <Text style={styles.empty}>No leads yet. New form submissions will appear here as they arrive.</Text>
+            <Text style={styles.empty}>No leads yet. New form submissions will appear as they arrive.</Text>
           }
         />
       )}
