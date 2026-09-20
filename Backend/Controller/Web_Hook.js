@@ -27,13 +27,13 @@ export const get_Webhook= (req, res) => {
    
     const body = req.body;
     console.log(' RECEIVED WEBHOOK EVENT');
-    console.log(JSON.stringify(body, null, 2));
+    
    
     if (body.object !== 'page') return;
     for (const entry of body.entry ?? []) {
       for (const change of entry.changes ?? []) {
         if (change.field === 'leadgen') {
-         console.log("leadgen is successfully grabbed")
+        
          process_Lead(change.value,req.io)
 
         }
