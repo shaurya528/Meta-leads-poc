@@ -1,6 +1,6 @@
 import { flatten_Field_Data } from "./Flatten_Field.js";
 import { fetch_Lead_Detail } from "./fetch_lead.js";
-const leads = [];
+import { leads } from "../server.js";
 const seenLeadIds = new Set();
 
 export const process_Lead=async(value,io)=>{
@@ -14,6 +14,7 @@ export const process_Lead=async(value,io)=>{
         formId: value.form_id,
         pageId: value.page_id,
         adId: value.ad_id ?? null,
+        createdAt: new Date().toISOString(),
         fields: details ? flatten_Field_Data(details.field_data) : {},
       };
 

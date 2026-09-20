@@ -1,0 +1,27 @@
+{
+  "name": "meta-ads-lead",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "backend": "npm start --prefix Backend",
+    "mobile": "cd Mobile/lead-app && npx expo start",
+    "dev": "concurrently -k -n \"BACKEND,MOBILE\" -c \"cyan,magenta\" \"npm run backend\" \"npm run mobile\""
+  },
+  "devDependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaurya528/Meta-leads-poc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaurya528/Meta-leads-poc/issues"
+  },
+  "homepage": "https://github.com/shaurya528/Meta-leads-poc#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

@@ -7,6 +7,13 @@ import { Server } from 'socket.io';
 const app = express();
 const PORT = process.env.PORT || 3003;
 const server = http.createServer(app);
+app.use((req, res, next) => {
+  console.log(req.method, req.originalUrl);
+  next();
+});
+ export const leads = []; 
+
+
 const io = new Server(server, {
   cors: { origin: '*' } 
 });
@@ -26,6 +33,9 @@ app.use((req, res, next) => {
 
 
 app.use('',allroutes)
+app.get('/leads', (req, res) => {
+  res.json(leads); 
+});
 app.get('/', (req, res) => {
   res.send('Server is running!');
 });
